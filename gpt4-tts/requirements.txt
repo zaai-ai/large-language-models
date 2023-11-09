@@ -1,0 +1,4 @@
+pytube==15.0.0
+moviepy==1.0.3
+openai==0.28.1
+opencv-python==4.8.1
