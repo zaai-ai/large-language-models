@@ -4,6 +4,7 @@ import logging
 import openai
 import requests
 import time
+from typing import Optional
 
 from IPython.display import display, Image
 from moviepy.editor import VideoFileClip, AudioFileClip
@@ -11,7 +12,7 @@ from moviepy.editor import VideoFileClip, AudioFileClip
 logging.basicConfig(level=logging.INFO)
 
 
-def convert_frames_to_base64(path_to_video: str, resize_dim: tuple = None) -> list:
+def convert_frames_to_base64(path_to_video: str, resize_dim: Optional[tuple] = None) -> list:
     """
     Reads a video from the path provided and convert it to base64
     If resize_dim is provided then it also resizes the frames
@@ -113,7 +114,7 @@ def get_description(prompt: str, frame_list: list, frame_interval: int, open_ai_
     return result.choices[0].message.content
 
 
-def transform_text_to_speech(description: str, open_ai_key: str, model: str, voice: str, save_path: str):
+def transform_text_to_speech(description: str, open_ai_key: str, model: str, voice: str, save_path: str) -> bytes:
     """
     Receives a string and transform it into audio
     Args:
