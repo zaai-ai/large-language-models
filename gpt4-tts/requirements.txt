@@ -1,4 +1,5 @@
-pytube==15.0.0
 moviepy==1.0.3
 openai==0.28.1
-opencv-python==4.8.1
+opencv-python==4.8.1.78
+jupyterlab==4.0.8
+python-dotenv==1.0.0
