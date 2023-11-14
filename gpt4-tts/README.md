@@ -1,5 +1,4 @@
 # Seeing with Sound: Empowering the Visually Impaired with GPT-4V(ision) and Text-to-Speech Technology
----
 
 **Steps to run the code:**
 1. Create a virtual environment with python 3.10.13
