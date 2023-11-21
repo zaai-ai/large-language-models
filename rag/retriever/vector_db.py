@@ -1,21 +1,21 @@
-import yaml
-
 from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
 from langchain.text_splitter import CharacterTextSplitter
-from pathlib import Path
+from langchain.vectorstores import FAISS
+
+from base.config import Config
 
 
-class VectorDatabase:
-    """ FAISS database """
+class VectorDatabase(Config):
+    """FAISS database"""
+
     def __init__(self) -> None:
-        self.config = yaml.safe_load(open(f'{Path().parent.absolute()}/config.yaml'))
+        super().__init__()
         self.retriever = FAISS
         self.text_splitter = CharacterTextSplitter(
-            chunk_size=self.config['retriever']['passage']['chunk_size'],
-            chunk_overlap=self.config['retriever']['passage']['chunk_overlap']
+            chunk_size=self.config["retriever"]["passage"]["chunk_size"],
+            chunk_overlap=self.config["retriever"]["passage"]["chunk_overlap"],
         )
-    
+
     def create_passages_from_documents(self, documents: list) -> list:
         """
         Splits the documents into passages of a certain length
@@ -25,7 +25,7 @@ class VectorDatabase:
             list: list of passages
         """
         return self.text_splitter.split_documents(documents)
-    
+
     def store_passages_db(self, passages: list, encoder: HuggingFaceEmbeddings) -> None:
         """
         Store passages in vector database in embedding format
@@ -34,7 +34,7 @@ class VectorDatabase:
             encoder (HuggingFaceEmbeddings): encoder to convert passages into embeddings
         """
         self.db = self.retriever.from_documents(passages, encoder)
-    
+
     def retrieve_most_similar_document(self, question: str) -> str:
         """
         Retrieves the most similar document for a certain question

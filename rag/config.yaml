@@ -14,3 +14,4 @@ retriever:
 
 generator:
   llm_path: "model/nous-hermes-llama-2-7b.Q4_0.gguf"
+  context_length: 1024
