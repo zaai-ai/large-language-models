@@ -28,7 +28,10 @@ passages = faiss_db.create_passages_from_documents(train)
 faiss_db.store_passages_db(passages, encoder.encoder)
 
 query = test[0].page_content.split("<</SYS>>")[2]
+query = "Write a function step-by-step that reverses a linked list and explain it."
+query = "Write a function step-by-step that reverses a linked list."
 context = faiss_db.retrieve_most_similar_document(query)
+context = ''
 print(generator.get_answer(context, query))
 
 print(query)
