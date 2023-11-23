@@ -1,6 +1,5 @@
-from langchain.embeddings import HuggingFaceEmbeddings
-
 from base.config import Config
+from langchain.embeddings import HuggingFaceEmbeddings
 
 
 class Encoder(Config):

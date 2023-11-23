@@ -9,4 +9,20 @@
 `pip install -r requirements.txt`
 4. Create a folder called model under `rag/`
 5. Download Llama model `nous-hermes-llama-2-7b.Q4_0.gguf` from https://huggingface.co/TheBloke/Nous-Hermes-Llama-2-7B-GGUF/tree/main and add it to `model/`
-5. Run the notebook (?) or main.py ?
+5. Run the notebook
+
+## Folder Structure:
+------------
+
+    ├── RAG
+    │
+    ├──────── base           <- Configuration class
+    ├──────── encoder        <- Encoder class
+    ├──────── generator      <- Generator class
+    ├──────── retriever      <- Retriever class
+    │
+    │──── config.yaml        <- Config definition
+    │──── requirements.txt   <- package version for installing
+    │
+    └──── rag.ipynb          <- notebook to run the code
+--------

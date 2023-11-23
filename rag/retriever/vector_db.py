@@ -1,8 +1,7 @@
+from base.config import Config
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores import FAISS
-
-from base.config import Config
 
 
 class VectorDatabase(Config):

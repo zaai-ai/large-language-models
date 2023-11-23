@@ -1,8 +1,7 @@
+from base.config import Config
 from langchain import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.llms import LlamaCpp
-
-from base.config import Config
 
 
 class Generator(Config):
@@ -14,6 +13,7 @@ class Generator(Config):
         self.llm = LlamaCpp(
             model_path=f"{self.parent_path}/{self.config['generator']['llm_path']}",
             n_ctx=self.config["generator"]["context_length"],
+            temperature=self.config["generator"]["temperature"],
         )
         # create prompt template
         self.prompt = PromptTemplate(
@@ -31,7 +31,9 @@ class Generator(Config):
         """
 
         query_llm = LLMChain(
-            llm=self.llm, prompt=self.prompt, llm_kwargs={"max_tokens": 5000}
+            llm=self.llm,
+            prompt=self.prompt,
+            llm_kwargs={"max_tokens": self.config["generator"]["max_tokens"]},
         )
 
         return query_llm.run({"context": context, "question": question})
