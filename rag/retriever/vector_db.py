@@ -34,13 +34,17 @@ class VectorDatabase(Config):
         """
         self.db = self.retriever.from_documents(passages, encoder)
 
-    def retrieve_most_similar_document(self, question: str) -> str:
+    def retrieve_most_similar_document(self, question: str, k: int) -> str:
         """
         Retrieves the most similar document for a certain question
         Args:
             question (str): user question
+            k (int): number of documents to query
         Returns:
             str: most similar document
         """
 
-        return self.db.similarity_search(question, k=1)[0].page_content
+        docs = self.db.similarity_search(question, k=k)
+        docs = [d.page_content for d in docs]
+
+        return '\n'.join(docs)
