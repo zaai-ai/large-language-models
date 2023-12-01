@@ -3,48 +3,12 @@ from scipy.special import softmax
 import math
 
 
-sentence = "Today is sunday"
-
-vacabulary = ['Today', 'is', 'sunday', 'saturday']
-
-# Initial Embedding (one-hot encoding):
-
-x_1 = [1,0,0,0] # Today 
-x_2 = [0,1,0,0] # is 
-x_3 = [0,0,1,0] # Sunday
-x_4 = [0,0,0,1] # Saturday
-
-X_example = np.stack([x_1, x_2, x_3], axis=0)
-
-W_Q = np.random.uniform(-1, 1, size=(4, 4))
-W_K = np.random.uniform(-1, 1, size=(4, 4))
-W_V = np.random.uniform(-1, 1, size=(4, 4))
-
-Q = np.matmul(X_example, W_Q)
-K = np.matmul(X_example, W_K)
-V = np.matmul(X_example, W_V)
-
-Attention_scores = np.matmul(Q, np.transpose(K))
-
-# Renormalization: division by square root of model-dimension:
-
-Attention_scores = Attention_scores / 2 
-
-Softmax_Attention_Matrix = np.apply_along_axis(softmax, 1, Attention_scores)
-
-One_Head_Attention = np.matmul(Softmax_Attention_Matrix,V)
-
-
-# exit()
-
-# ----------------------------------------------------------- 
-
 
 class W_matrices:
-    def __init__(self, n_lines, n_cols):
-        self.W_Q = np.random.uniform(low=-1, high=1, size=(n_lines, n_cols))
-        self.W_K = np.random.uniform(low=-1, high=1, size=(n_lines, n_cols))
-        self.W_V = np.random.uniform(low=-1, high=1, size=(n_lines, n_cols))
+    def __init__(self, X_size, d_k, d_v): #X_size == d_model ; d_k == d_q
+        self.W_Q = np.random.uniform(low=-1, high=1, size=(X_size, d_k))
+        self.W_K = np.random.uniform(low=-1, high=1, size=(X_size, d_k))
+        self.W_V = np.random.uniform(low=-1, high=1, size=(X_size, d_v))
 
     def print_W_matrices(self):
         print('W_Q : \n', self.W_Q)
@@ -52,9 +16,9 @@ class W_matrices:
         print('W_V : \n', self.W_V)
 
 class One_Head_Attention:
-    def __init__(self, d_model, X):
-        self.d_model = d_model
-        self.W_mat = W_matrices(d_model, d_model)
+    def __init__(self, X, d_k, d_v):
+        self.d_model = len(X)
+        self.W_mat = W_matrices(self.d_model, d_k, d_v)
 
         self.Q = np.matmul(X, self.W_mat.W_Q)
         self.K = np.matmul(X, self.W_mat.W_K)
@@ -65,7 +29,6 @@ class One_Head_Attention:
         print('K : \n', self.K)
         print('V : \n', self.V)
 
-
     def compute_1_head_attention(self):
         Attention_scores = np.matmul(self.Q, np.transpose(self.K)) 
         print('Attention_scores before normalization : \n', Attention_scores)
@@ -73,30 +36,29 @@ class One_Head_Attention:
         print('Attention scores after Renormalization: \n ', Attention_scores)
         Softmax_Attention_Matrix = np.apply_along_axis(softmax, 1, Attention_scores)
         print('result after softmax: \n', Softmax_Attention_Matrix)
-        # print('Softmax shape: ', Softmax_Attention_Matrix.shape)
 
         result = np.matmul(Softmax_Attention_Matrix, self.V)
         print('softmax result multiplied by V: \n', result)
 
-
         return result
 
-    def _backprop(self):
+    def backpropagate(self):
         # do smth to update W_mat
         pass
 
 class Multi_Head_Attention:
-    def __init__(self, n_heads, d_model, X):
-        self.d_model = d_model
+    def __init__(self, n_heads, X, d_k, d_v):
+        self.d_model = len(X)
         self.n_heads = n_heads
-        self.d_concat = self.d_model*self.n_heads # 4*8
+        self.d_k = d_k
+        self.d_v = d_v
+        self.d_concat = self.d_model*self.n_heads
         self.W_0 = np.random.uniform(-1, 1, size=(self.d_concat, self.d_model))
-        # print('W_0 shape : ', self.W_0.shape)
         self.heads = []
         self.heads_results = []
         i = 0
         while i < self.n_heads:
-            self.heads.append(One_Head_Attention(self.d_model, X))
+            self.heads.append(One_Head_Attention(X, d_k=d_k , d_v=d_v ))
             i += 1
 
     def print_W_0(self):
@@ -119,10 +81,8 @@ class Multi_Head_Attention:
     def compute(self):
         for head in self.heads:
             self.heads_results.append(head.compute_1_head_attention())
-            # print('dimensao do resultado da head: ', self.heads_results[-1].shape)
 
         multi_head_results = np.concatenate(self.heads_results, axis=1)
-        # print('multi_head_results shape = ', multi_head_results.shape)
 
         V_updated = np.matmul(multi_head_results, self.W_0)
         return V_updated
@@ -163,20 +123,3 @@ class Positional_Encoding:
 
         return X + self.PE
 
-
-# -------------------------------------------
-# -------------------------------------------
-
-X = np.stack([x_1, x_2, x_3], axis=0)
-
-multi_head_attention = Multi_Head_Attention(2, 4, X)
-
-multi_head_attention.print_W_matrices_each_head()
-
-multi_head_attention.print_QKV_each_head()
-
-multi_head_attention.print_W_0()
-
-V_updated_by_context = multi_head_attention.compute()
-
-print(V_updated_by_context)
