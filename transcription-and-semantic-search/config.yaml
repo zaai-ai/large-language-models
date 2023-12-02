@@ -6,6 +6,10 @@ encoder:
 
   encode_kwargs:
     normalize_embeddings: False
+  
+transcriptor:
+  model: "base"
+  device: "cpu"
 
 generator:
   llm_path: "model/nous-hermes-llama-2-7b.Q4_0.gguf"
