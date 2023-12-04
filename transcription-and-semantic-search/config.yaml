@@ -8,5 +8,9 @@ encoder:
     normalize_embeddings: False
   
 transcriptor:
-  model: "base"
+  whisper:
+    model: "large"
+  whisperx:
+    model: "small"
+    compute_type: "int8"
   device: "cpu"
