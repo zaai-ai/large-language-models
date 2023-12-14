@@ -1,6 +1,7 @@
-from base.config import Config
-from transformers import pipeline
 import yaml
+from transformers import pipeline
+
+from base.config import Config
 
 
 class LanguageDetector(Config):
@@ -8,7 +9,11 @@ class LanguageDetector(Config):
 
     def __init__(self) -> None:
         super().__init__()
-        self.model = pipeline("text-classification", model=self.config["classifier"]["model"], device=self.config["classifier"]["device"])
+        self.model = pipeline(
+            "text-classification",
+            model=self.config["classifier"]["model"],
+            device=self.config["classifier"]["device"],
+        )
 
     def detect_language(self, document: str) -> str:
         """
@@ -19,6 +24,6 @@ class LanguageDetector(Config):
             str: language
         """
 
-        lang = self.model([document])[0]['label']
-        
+        lang = self.model([document])[0]["label"]
+
         return self.lang_map[lang]

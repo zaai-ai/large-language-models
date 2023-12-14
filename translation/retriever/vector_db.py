@@ -1,11 +1,12 @@
+import os
 from pathlib import Path
-from base.config import Config
+
+from dotenv import load_dotenv
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.vectorstores.pgvector import PGVector
 
-import os
-from dotenv import load_dotenv
+from base.config import Config
 
 load_dotenv(f"{Path().parent.absolute()}/env/connection.env")
 
@@ -26,13 +27,13 @@ class VectorDatabase(Config):
         )
         self.encoder = encoder
         self.conn_str = PGVector.connection_string_from_db_params(
-                    driver=os.getenv("DRIVER"),
-                    host=os.getenv("HOST"),
-                    port=os.getenv("PORT"),
-                    database=os.getenv("DATABASE"),
-                    user=os.getenv("USERNAME"),
-                    password=os.getenv("PASSWORD"),
-                )
+            driver=os.getenv("DRIVER"),
+            host=os.getenv("HOST"),
+            port=os.getenv("PORT"),
+            database=os.getenv("DATABASE"),
+            user=os.getenv("USERNAME"),
+            password=os.getenv("PASSWORD"),
+        )
 
     def create_passages_from_documents(self, documents: list) -> list:
         """

@@ -1,7 +1,8 @@
-from base.config import Config
 from langchain import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.llms import LlamaCpp
+
+from base.config import Config
 
 
 class Generator(Config):
