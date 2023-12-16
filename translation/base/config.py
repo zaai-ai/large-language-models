@@ -6,5 +6,5 @@ import yaml
 class Config:
     def __init__(self):
         self.parent_path = Path().parent.absolute()
-        self.config = yaml.safe_load(open(f"{self.parent_path}/config.yaml"))
-        self.lang_map = yaml.safe_load(open(f"{self.parent_path}/lang_map.yaml"))
+        self.config = yaml.safe_load(open(f"{self.parent_path}/config/config.yaml"))
+        self.lang_map = yaml.safe_load(open(f"{self.parent_path}/config/lang_map.yaml"))
