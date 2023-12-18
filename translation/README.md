@@ -19,6 +19,7 @@
 6. Run the command `docker-compose up -d`
 7. Run the command `python populate.py` to populate the vectordb with user reviews
 8. Run the command `streamlit run app.py` to initiate our app and ask about the product
+9. Or you can skip step 7. and 8. and run the notebook `translation.ipynb` 
 
 ## Folder Structure:
 ------------
@@ -38,6 +39,7 @@
     │──── lang_map.yaml                                     <- language mapping between XLM-RoBERTa and mBART
     │──── requirements.txt                                  <- package version for installing
     │
+    │──── translation.ipynb                                 <- notebook
     │──── populate.py                                       <- python script to populate PGVector
     └──── app.py                                            <- streamlit application to chat with our LLM
 --------
