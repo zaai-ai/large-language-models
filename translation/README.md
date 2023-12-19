@@ -18,8 +18,9 @@
     ```
 6. Run the command `docker-compose up -d`
 7. Run the command `python populate.py` to populate the vectordb with user reviews
-8. Run the command `streamlit run app.py` to initiate our app and ask about the product
-9. Or you can skip step 7. and 8. and run the notebook `translation.ipynb` 
+8. Download Llama model `nous-hermes-llama-2-7b.Q4_0.gguf` from https://huggingface.co/TheBloke/Nous-Hermes-Llama-2-7B-GGUF/tree/main and add it to `model/`
+9. Run the command `streamlit run app.py` to initiate our app and ask about the product
+10. Or you can skip step 7. and 8. and run the notebook `translation.ipynb` 
 
 ## Folder Structure:
 ------------
