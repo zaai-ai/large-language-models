@@ -7,10 +7,31 @@ services:
     ports:
       - "5432:5432"
     env_file:
-      - ./env/postgres.env
+      - ./src/env/postgres.env
     volumes:
       - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
+    networks:
+      - zaai_network
+  
+  chatbot:
+    container_name: chatbot
+    build: .
+    image: chatbot:dev
+    ports:
+      - "8501:8501"
+    env_file:
+      - ./src/env/postgres.env
+    volumes:
+      - ./src:/usr/src/translation
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    networks:
+      - zaai_network
 
 volumes:
   postgres-data:
+
+networks:
+  zaai_network:
