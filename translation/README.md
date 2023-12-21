@@ -26,7 +26,7 @@
     PASSWORD=root
     ```
 7. Download Llama model `nous-hermes-llama-2-7b.Q4_0.gguf` from https://huggingface.co/TheBloke/Nous-Hermes-Llama-2-7B-GGUF/tree/main and add it to `translation/src/model/`
-6. Run the command `docker-compose up --build -d` and you can open http://localhost:8501/ in your browser and chat!
+8. Run the command `docker-compose up --build` and you can open http://localhost:8501/ in your browser and chat!
 9. Or you can run in the notebook `translation.ipynb` 
 
 ## Folder Structure:
