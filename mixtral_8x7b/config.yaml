@@ -17,7 +17,7 @@ generator:
     llm_path: "model/mistral-7b-v0.1.Q4_K_M.gguf"
   llama70b:
     llm_path: "model/llama-2-70b.Q4_K_M.gguf"
-  mistral8x7b:
+  mixtral8x7b:
     llm_path: "model/mixtral-8x7b-v0.1.Q4_K_M.gguf"
   context_length: 1024
   temperature: 0.3
