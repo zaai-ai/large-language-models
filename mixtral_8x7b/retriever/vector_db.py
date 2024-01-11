@@ -78,4 +78,4 @@ class VectorDatabase(Config):
         docs = self.db.similarity_search(question, k=k)
         docs = [d.page_content for d in docs]
 
-        return '\n'.join(docs)
+        return "\n".join(docs)
