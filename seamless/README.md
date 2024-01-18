@@ -19,5 +19,6 @@
     │
     │──── requirements.txt              <- package version for installing
     │
+    │──── utils.py                      <- helper functions
     └──── seamless.ipynb                <- notebook to run the code
 --------
