@@ -1,6 +1,6 @@
 # Welcome to the LLM Experiments Lab at ZAAI 🧠🤖
 
-Published on Medium, Towards Data Science, and [ZAAI's Lab](https://zaai.ai/lab), this collection ventures into the captivating areas of Natural Language Processing (NLP) and Large Language Models (LLMs). Here, we invite you to explore our AI passion as we share open-source code, datasets, and abundant resources. Our aim is to empower individuals and organizations, enabling them to track our experiments, find inspiration, and solve complex use cases in their own domains.
+Published on Medium, Towards Data Science, and [ZAAI's Lab](https://zaai.ai/lab), this collection of articles ventures into the captivating areas of Natural Language Processing (NLP) and Large Language Models (LLMs). Here, we invite you to explore our AI passion as we share open-source code, datasets, and abundant resources. Our aim is to empower individuals and organizations, enabling them to track our experiments, find inspiration, and solve complex use cases in their own domains.
 
 🌟 Enjoy our content? Star the repo to support our journey into AI's frontiers!
 
@@ -21,6 +21,11 @@ Published on Medium, Towards Data Science, and [ZAAI's Lab](https://zaai.ai/lab)
 - **[AI-Powered Customer Support App: Semantic Search with PGVector, Llama2 with an RAG System, and Advanced Translation Models](https://medium.com/towards-data-science/ai-powered-customer-support-app-semantic-search-with-pgvector-llama2-with-an-rag-system-and-fc1eef1738d8)**
   - *Published on Jan 4, 2024, Co-authored Luís Roque and Rafael Guedes*
 
+- **[LLMs and Transformers from Scratch: the Decoder](https://towardsdatascience.com/llms-and-transformers-from-scratch-the-decoder-d533008629c5)**
+  - *Published on Jan 10, 2024, Co-authored Luís Roque and Rafael Nardi*
+
+- **[Mistral AI vs. Meta: Comparing Top Open-source LLMs](https://towardsdatascience.com/mistral-ai-vs-meta-comparing-top-open-source-llms-565c1bc1516e)**
+  - *Published on Jan 23, 2024, Co-authored Luís Roque and Rafael Guedes*
 
 ## 🛠 Getting Started
 
