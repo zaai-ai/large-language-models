@@ -158,8 +158,12 @@ class InteractionAggregation(nn.Module):
         self.w_xy = nn.Parameter(torch.Tensor(num_heads * self.head_x_dim * self.head_y_dim, 
                                               output_dim))
         nn.init.xavier_normal_(self.w_xy)
+        self.x_importance = []
+        self.y_importance = []
 
     def forward(self, x, y):
+        self.x_importance.append(torch.mean(torch.abs(self.w_x(x))))
+        self.y_importance.append(torch.mean(torch.abs(self.w_y(y))))
         output = self.w_x(x) + self.w_y(y)
         head_x = x.view(-1, self.num_heads, self.head_x_dim)
         head_y = y.view(-1, self.num_heads, self.head_y_dim)
