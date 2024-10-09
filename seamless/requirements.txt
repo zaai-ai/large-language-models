@@ -1,0 +1,4 @@
+moviepy==1.0.3
+jupyterlab==4.0.8
+git+https://github.com/huggingface/transformers
+sentencepiece==0.1.99
